@@ -32,7 +32,7 @@ class SettingSeeder extends Seeder
 
         $setting = new Setting;
         $setting->name = 'type_footer';
-        $setting->value = 'Khadyo || All rights reserved';
+        $setting->value = 'Sama Restaurant || All rights reserved';
         $setting->save();
 
         $setting = new Setting;
@@ -52,17 +52,17 @@ class SettingSeeder extends Seeder
 
         $setting = new Setting;
         $setting->name = 'siteName';
-        $setting->value = 'Khadyo Restaurant';
+        $setting->value = 'Sama Restaurant';
         $setting->save();
 
         $setting = new Setting;
         $setting->name = 'address';
-        $setting->value = 'Uttara, Dhaka';
+        $setting->value = 'Dakar, Senegal';
         $setting->save();
 
         $setting = new Setting;
         $setting->name = 'phnNo';
-        $setting->value = '12345';
+        $setting->value = '+221 77 429 41 71';
         $setting->save();
 
         $setting = new Setting;

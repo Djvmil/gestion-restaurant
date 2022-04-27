@@ -101,7 +101,7 @@ class InstallerController extends Controller
             overWriteEnvFile('PURCHASE_KEY', $request->purchase_key);
             overWriteEnvFile('MIX_PUSHER_APP_CLUSTER_SECURE', '7469a286259799e5b37e5db9296f00b3');
             if ($request->ip() == "127.0.0.1" || $request->ip() == "::1") {
-                $new_base_path = "http://localhost/khadyo";
+                $new_base_path = "http://localhost/samaresto";
                 overWriteEnvFile('APP_URL', $new_base_path);
             } else {
                 $new_base_path = $request->getSchemeAndHttpHost();

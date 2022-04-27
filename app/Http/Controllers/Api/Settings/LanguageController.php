@@ -35,6 +35,7 @@ class LanguageController extends Controller
     //store a new language
     public function langStore(Request $request)
     {
+        error_log("error_log langStore");
         $request->validate([
             'code'   => ['required', 'unique:langs'],
             'name'   => ['required', 'unique:langs']
@@ -69,9 +70,12 @@ class LanguageController extends Controller
         $lan->save();
 
         if($request->ip()=="127.0.0.1" || $request->ip()== "::1" ){
-            $path = base_path()."\locales\\en";
-            $library_to_path = base_path()."\locales\\".$lan->code;// Coping to folder Path
-            $laravel_Path = public_path()."\locales\\".$lan->code;
+            // $path = base_path()."\locales\\en";
+            // $library_to_path = base_path()."\locales\\".$lan->code;// Coping to folder Path
+            // $laravel_Path = public_path()."\locales\\".$lan->code;
+            $path = base_path()."/locales/en";
+            $library_to_path = base_path()."/locales/".$lan->code;// Coping to folder Path
+            $laravel_Path = public_path()."/locales/".$lan->code;
         }else{
             $path = base_path()."/locales/en";
             $library_to_path = base_path()."/locales/".$lan->code;// Coping to folder Path
@@ -87,6 +91,7 @@ class LanguageController extends Controller
     //Update a  new language
     public function langUpdate(Request $request)
     {
+        error_log("error_log langUpdate");
         $lan = Lang::where('code', $request->editCode)->first();
         $request->validate([
             'name'  => ['required', 'unique:langs,code,'.$lan->code]
@@ -142,10 +147,12 @@ class LanguageController extends Controller
     //save to en > translation.json
     public function store(Request $request)
     {
+        error_log("error_log store");
         //todo:: make url dynamic for live
         // $tpath =  "C:/work/Installed/xampp/htdocs/foodkhan/client/public/locales/en/";
         // $tpath =  "C:\xampp\htdocs\khadyo_updated_production_saas\client\public\locales\en";
-        $tpath = public_path().'\locales\en';
+        // $tpath = public_path().'\locales\en';
+        $tpath = public_path().'/locales/en';
         if(File::exists($tpath  . 'translation.json')){
             $jsonString = file_get_contents($tpath  . 'translation.json');
             $jsonString = json_decode($jsonString, true);
@@ -161,13 +168,17 @@ class LanguageController extends Controller
     //get data to translate
     public function getTranslations(Request $request, $code)
     {
+
         $jsonString = [];
 
         if($request->ip()=="127.0.0.1" || $request->ip()=="::1" ){
-            $tpath =  public_path()."\locales\\".$code.'\\';
+            // $tpath =  public_path()."\locales\\".$code.'\\'; //windows
+            $tpath =  public_path()."/locales/".$code.'/';    //linux
         }else{
             $tpath =  public_path()."/locales/".$code.'/';
         }
+        
+        error_log("error_log getTranslations $tpath");
 
         if (File::exists($tpath."translation.json")) {
             $jsonString = file_get_contents($tpath."translation.json");
@@ -180,12 +191,16 @@ class LanguageController extends Controller
     //save new translations
     public function saveTranslation(Request $request)
     {
+        error_log("error_log saveTranslation");
         $data = $request->data;
         $code = $request->code;
 
         if($request->ip()=="127.0.0.1" || $request->ip()=="::1" ){
-            $path = base_path()."\locales\\".$code.'\\';
-            $laravel_Path = public_path()."\locales\\".$code.'\\';
+            
+            // $path = base_path()."\locales\\".$code.'\\';
+            // $laravel_Path = public_path()."\locales\\".$code.'\\';
+            $path = base_path()."/locales/".$code.'/';
+            $laravel_Path = public_path()."/locales/".$code.'/';
         }else{
             $path = base_path()."/locales/".$code.'/';
             $laravel_Path = public_path()."/locales/".$code.'/';

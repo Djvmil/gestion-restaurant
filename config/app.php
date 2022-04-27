@@ -22,11 +22,11 @@ return [
     'MAIL_MAILER' => env('MAIL_MAILER', 'smtp'),
     'MAIL_HOST' => env('MAIL_HOST', 'localhost'),
     'MAIL_PORT' => env('MAIL_PORT', '3306'),
-    'MAIL_USERNAME' => env('MAIL_USERNAME', 'khadyo'),
-    'MAIL_PASSWORD' => env('MAIL_PASSWORD', 'khadyo@123'),
+    'MAIL_USERNAME' => env('MAIL_USERNAME', 'samaresto'),
+    'MAIL_PASSWORD' => env('MAIL_PASSWORD', 'samaresto@123'),
     'MAIL_ENCRYPTION' => env('MAIL_ENCRYPTION', 'tls'),
-    'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS', 'khadyo@demo.com'),
-    'MAIL_FROM_NAME' => env('MAIL_FROM_NAME', 'khadyo'),
+    'MAIL_FROM_ADDRESS' => env('MAIL_FROM_ADDRESS', 'samaresto@demo.com'),
+    'MAIL_FROM_NAME' => env('MAIL_FROM_NAME', 'samaresto'),
 
 
     /*
