@@ -54,7 +54,7 @@ use Illuminate\Http\Request;
 
 /* installation routes*/
 
-Route::group(['middleware' => 'checkInstall'], function () {
+Route::group(['middleware' => ['checkInstall', 'cors']], function () {
     // Route::get('check-permission', function(){
     //     return 'hello';
     // })->name('permission');
@@ -68,7 +68,8 @@ Route::group(['middleware' => 'checkInstall'], function () {
 });
 
 //passport auth routes
-Route::group(['prefix' => 'auth'], function () {
+Route::group(['prefix' => 'auth',
+                'middleware' => 'cors'], function () {
     Route::post('/login', [ApiAuthController::class, 'login']); //login route
     Route::post('/register', [OnlineCustomerController::class, 'store']); //online registration route
     Route::post('/be-delivery-man', [DeliveryController::class, 'storeDeliveryMan']); //online registration route
@@ -81,7 +82,9 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 //website Routes
-Route::group(['prefix' => 'website'], function () {
+Route::group([
+    'middleware' => 'cors',
+    'prefix' => 'website'], function () {
     Route::get('/home', [OnlineCustomerController::class, 'index']); //foods route
     //branch
     Route::get('/get-branch-web', [BranchController::class, 'indexWeb']); //get all branch
@@ -115,7 +118,8 @@ Route::get('/check-install', function () {
 
 //Manage routes
 //unauthenticated
-Route::group(['prefix' => 'settings'], function () {
+Route::group(['middleware' => 'cors',
+                'prefix' => 'settings'], function () {
     //languages
     Route::get('/get-lang', [LanguageController::class, 'index']); //get all languages
     Route::post('/save-to-en', [LanguageController::class, 'store']); //save new key to en
@@ -150,7 +154,7 @@ Route::group(['prefix' => 'settings'], function () {
 });
 
 //authenticated
-Route::group(['prefix' => 'settings', 'middleware' => ['auth:api']], function () {
+Route::group(['prefix' => 'settings', 'middleware' => ['auth:api', 'cors']], function () {
     //without permission middleware
     //auth user profile
     Route::post('/update-profile', [AdminStaffController::class, 'updateProfile']); // update auth user profile
@@ -428,5 +432,8 @@ Route::group(['prefix' => 'settings', 'middleware' => ['auth:api']], function ()
     });
 });
 
+Route::group(['middleware' => 'cors'], function () {
 // paypal 
 Route::get('/get-payment-client-id', [OnlinePaymentController::class, 'showPaypal']);
+
+});
